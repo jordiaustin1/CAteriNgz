@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Signup Page</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="login.css">
+
+</head>
+<body>
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form id="sign-up-form">
+                <button type="button" class="cancel-btn" onclick="redirectToHome()"><i class="fas fa-times"></i></button>
+                <h1>Welcome!</h1>
+                <span>Fill out these boxes to Create an Account</span>
+                <input type="text" placeholder="Name" id="sign-up-name">
+                <input type="email" placeholder="Email" id="sign-up-email">
+                <input type="password" placeholder="Password" id="sign-up-password">
+                <label for="gender"></label>
+                <select name="gender" id="sign-up-gender">
+                    <option value="gender">Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Non">Prefer not to say</option>
+                </select>
+                <label for="date">Birth Date</label>
+                <input type="date" name="date" id="sign-up-date">
+                <button type="button" class="btn" onclick="validateSignUp()">Sign Up</button>
+                <a href="#">--------OR--------</a>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+            </form>
+        </div>
+        <div class="form-container sign-in">
+            <form id="sign-in-form">
+                <button type="button" class="cancel-btn" onclick="redirectToHome()"><i class="fas fa-times"></i></button>
+                <h1>Sign In</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                </div>
+                <span>or use your username to sign in</span>
+                <input type="name" placeholder="Name" id="sign-in-name">
+                <input type="password" placeholder="Password" id="sign-in-password">
+                <a href="#">Forget Your Password?</a>
+                <button type="button" class="btn" onclick="validateSignIn()">Sign In</button>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>Ready to Feast?</h1>
+                    <p>Already have an account?</p>
+                    <button class="hidden" id="login">Sign In</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>Welcome Back</h1>
+                    <h3>We're glad to see you again</h3>
+                    <p>First time here?</p>
+                    <button class="hidden" id="register">Sign Up</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+const container = document.getElementById('container');
+const registerBtn = document.getElementById('register');
+const loginBtn = document.getElementById('login');
+
+registerBtn.addEventListener('click', () => {
+    container.classList.add("active");
+});
+
+loginBtn.addEventListener('click', () => {
+    container.classList.remove("active");
+});
+
+function validateSignUp(){
+    const name = document.getElementById("sign-up-name");
+    const email = document.getElementById("sign-up-email");
+    const password = document.getElementById("sign-up-password");
+    const gender = document.getElementById("sign-up-gender");
+    const birth = document.getElementById("sign-up-date");
+    const today = new Date();
+    const birthDate = new Date(birth.value);
+
+    if(name.value.trim() === "" ||
+       email.value.trim() === "" ||
+       password.value.trim() === "" ||
+       gender.value === "gender" ||
+       birth.value.trim() === ""){
+        alert("Fill all of the forms");
+    }
+    else if(!email.value.endsWith("@gmail.com")){
+        alert("Email must end with @gmail.com");
+    }
+    else if(birthDate >= today){
+        alert("Check your birthday again!");
+    } else {
+        alert("Sign-up successful!");
+        window.location.href = "home.html";
+    }
+}
+
+function validateSignIn(){
+    const name = document.getElementById("sign-in-name");
+    const password = document.getElementById("sign-in-password");
+
+    if(name.value.trim() === "" || password.value.trim() === ""){
+        alert("Fill all of the forms");
+    } else {
+        alert("Sign-in successful!");
+        window.location.href = "home.html";
+    }
+}
+
+function redirectToHome(){
+    window.location.href = "home.html";
+}
+    </script>
+</body>
+</html>
+
